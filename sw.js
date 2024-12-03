@@ -25,9 +25,24 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request)
             .then((response) => {
+                // Return cached response if found
                 if (response) {
                     return response;
                 }
+
+                // For navigation requests (HTML pages), try to serve index.html or about.html
+                if (event.request.mode === 'navigate') {
+                    return caches.match('/index.html')
+                        .then((response) => {
+                            if (response) {
+                                return response;
+                            }
+                            // If no cached page is found, fetch from network
+                            return fetch(event.request);
+                        });
+                }
+
+                // For other requests, fetch from network
                 return fetch(event.request);
             })
     );

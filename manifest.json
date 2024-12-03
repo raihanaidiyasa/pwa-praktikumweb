@@ -2,7 +2,7 @@
   "name": "Contoh PWA Sederhana",
   "short_name": "PWA Demo",
   "description": "Aplikasi PWA pertama saya",
-  "start_url": "/",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3498db",
